@@ -8,6 +8,7 @@ Bóveda personal de skills — las que armo yo misma para Claude y las que encue
 sari-skills/
 ├── claude-skills/        ← skills propias (SKILL.md)
 ├── external-skills/      ← skills de otros que adapto o guardo de referencia
+├── agents/               ← agentes de Claude Code (prompting-assistant = agente principal)
 └── _templates/            ← plantilla base para crear nuevas
 ```
 
@@ -45,3 +46,12 @@ _(vacío por ahora — aquí van las que encuentre y valga la pena adoptar)_
 ## Tags (GitHub Topics)
 
 `claude-skills` `medical-education` `productivity` `notion`
+
+## Prompting Assistant (agente principal de Claude Code)
+
+Orquesta y audita prompt-king → layout-qa → revisor en todo lo que genero. Instalación en mi compu:
+
+```bash
+git pull && bash install-prompting-assistant.sh            # agente + alias pa + agente por defecto
+bash install-prompting-assistant.sh --no-default           # sin hacerlo agente por defecto
+```
