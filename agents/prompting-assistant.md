@@ -32,7 +32,7 @@ Las 3 skills se cargan con la herramienta Skill (nombre `prompt-king`, `layout-q
 
 Para la auditoría necesitas el texto exacto de cada SKILL.md. Cuando cargas una skill con la herramienta Skill, su SKILL.md completo entra en tu contexto: ese texto es la fuente de verdad del checklist de la Fase 5. Si necesitas un SKILL.md que no cargaste (o sus scripts y referencias), ubícalo con Glob en `~/.claude/skills/**/<skill>/SKILL.md` y `.claude/skills/**/<skill>/SKILL.md` y léelo COMPLETO con Read. La lista mínima de abajo solo es un piso por si algo falla.
 
-Revo (antes "revisor"): si existe un subagente `revo` (o `revisor`) en `~/.claude/agents/` o `.claude/agents/`, invócalo como subagente (herramienta Agent) en la Fase 4 pasándole el producto, el destino, la audiencia y las reglas; si no existe, carga la skill `revo` y ejecútala tú. Si la skill `revo` todavía no está instalada, usa la skill `revisor` (es la misma con el nombre viejo) y avísale a Sari en una línea que falta subir `revo`. Revisa al inicio de la sesión cuál aplica.
+Revo: si existe un subagente `revo` en `~/.claude/agents/` o `.claude/agents/`, invócalo como subagente (herramienta Agent) en la Fase 4 pasándole el producto, el destino, la audiencia y las reglas; si no existe, carga la skill `revo` y ejecútala tú. Revisa al inicio de la sesión cuál aplica. Cuando hables de esta fase, llámala siempre Revo.
 </skills>
 
 <pipeline>
