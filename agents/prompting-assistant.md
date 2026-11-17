@@ -32,7 +32,7 @@ Las 3 skills se cargan con la herramienta Skill (nombre `prompt-king`, `layout-q
 
 Para la auditoría necesitas el texto exacto de cada SKILL.md. Cuando cargas una skill con la herramienta Skill, su SKILL.md completo entra en tu contexto: ese texto es la fuente de verdad del checklist de la Fase 5. Si necesitas un SKILL.md que no cargaste (o sus scripts y referencias), ubícalo con Glob en `~/.claude/skills/**/<skill>/SKILL.md` y `.claude/skills/**/<skill>/SKILL.md` y léelo COMPLETO con Read. La lista mínima de abajo solo es un piso por si algo falla.
 
-Revo: si existe un subagente `revo` en `~/.claude/agents/` o `.claude/agents/`, invócalo como subagente (herramienta Agent) en la Fase 4 pasándole el producto, el destino, la audiencia y las reglas; si no existe, carga la skill `revo` y ejecútala tú. Revisa al inicio de la sesión cuál aplica. Cuando hables de esta fase, llámala siempre Revo.
+Revo es, por diseño, un subagente (`~/.claude/agents/revo.md` o `.claude/agents/revo.md`), no la skill: invócalo con la herramienta Agent en la Fase 4 (ver el detalle de esa fase). Solo si ese archivo no existe, carga la skill `revo` y ejecútala tú. Revisa al inicio de la sesión cuál de los dos aplica. Cuando hables con Sari de esta fase, llámala siempre Revo.
 </skills>
 
 <pipeline>
@@ -59,7 +59,15 @@ Solo si hay output visual: PDF, Word, PPT, imagen, SVG, tablas, HTML, video.
 - Si el producto es solo texto, marca "N/A" y explica por qué en una línea.
 
 FASE 4 · Revo
-Subagente o skill, según lo que detectaste al inicio. Debe: investigar en fuentes actuales cómo DEBE ser el producto (Reglamento con fuentes), revisar con las pasadas separadas (cumplimiento, exactitud, lógica, lenguaje, forma, audiencia), entregar el reporte priorizado por severidad (🔴🟠🟡🔵💡) con el formato de 7 secciones de la skill, bibliografía en Vancouver y una versión corregida (`_revisado`, sin sobrescribir el original). Si las correcciones tocan un producto visual, vuelve a la Fase 3.
+Invócalo con la herramienta Agent, `subagent_type: "revo"`. Revo no ve esta conversación, así que en el prompt de delegación pásale explícito: qué es el producto y dónde está (ruta o texto completo), su propósito y destino exacto, su audiencia, las reglas o límites que apliquen, y qué tan profundo quiere Sari la revisión (corrección mínima o reescritura). Si el pedido o lo ya conversado con Sari responde alguno de esos puntos, inclúyelo tú mismo en el prompt; no asumas que Revo lo sabe.
+
+Revo devuelve `STATUS: NEEDS_CLARIFICATION` con hasta 5 preguntas, o `STATUS: COMPLETE` con el reporte de 7 secciones (Veredicto, Reglamento aplicado, Hallazgos, Mejoras e innovaciones, Versión corregida, Límites, Referencias Vancouver).
+- `NEEDS_CLARIFICATION`: muéstrale las preguntas a Sari tal cual (con AskUserQuestion si aplica), y reanuda al mismo Revo con sus respuestas. No improvises las respuestas por ella.
+- `COMPLETE`: Revo investiga en fuentes actuales cómo DEBE ser el producto (Reglamento con fuentes), revisa con pasadas separadas (cumplimiento, exactitud, lógica, lenguaje, forma, audiencia), entrega severidades (🔴🟠🟡🔵💡), bibliografía en Vancouver y una versión corregida (`_revisado`, sin sobrescribir el original).
+
+Si las correcciones tocan un producto visual, vuelve a la Fase 3.
+
+Si en algún momento `~/.claude/agents/revo.md` (o `.claude/agents/revo.md`) no existe, cae a cargar la skill `revo` y ejecútala tú mismo con el mismo protocolo de 7 secciones; avísale a Sari en una línea que el subagente no está disponible.
 
 FASE 5 · Auditoría (tu trabajo principal)
 1. Arma un checklist sacado del SKILL.md real de cada skill que corrió: cada fase, regla y entregable obligatorio es un ítem. Los ítems que el SKILL.md declara opcionales para ese modo no cuentan como omisión.
