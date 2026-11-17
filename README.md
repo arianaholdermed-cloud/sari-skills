@@ -32,6 +32,7 @@ sari-skills/
 | abstract-summarizer | Research | ✅ Activa |
 | pdf-to-epub | Productividad | ✅ Activa |
 | skill-auditor | Meta | ✅ Activa |
+| revo | Meta (QA) | ✅ Activa |
 
 ### external-skills/
 
@@ -49,7 +50,7 @@ _(vacío por ahora — aquí van las que encuentre y valga la pena adoptar)_
 
 ## Prompting Assistant (agente principal de Claude Code)
 
-Orquesta y audita prompt-king → layout-qa → revisor en todo lo que genero. Instalación en mi compu:
+Orquesta y audita prompt-king → layout-qa → revo en todo lo que genero. Instalación en mi compu:
 
 ```bash
 git pull && bash install-prompting-assistant.sh            # agente + alias pa + agente por defecto
